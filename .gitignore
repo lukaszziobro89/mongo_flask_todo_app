@@ -1,7 +1,7 @@
 *.wt
 app-data/*.wt
-data/diagnostic.data/
-data/journal
+app-data/diagnostic.data/
+app-data/journal
 *.lock
 *.swp
 *.pyc
@@ -17,3 +17,6 @@ rs3/diagnostic.data
 rs1/journal
 rs2/journal
 rs3/journal
+
+.idea
+/venv

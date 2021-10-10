@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+
+  mongo_db:
+    image: 'mongo:latest'
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./app-data:/data/db
+
+  mongo_init_db:
+    image: 'mongo:latest'
+    container_name: 'mongo_init_db'
+    volumes: 
+      - ./scripts/:/scripts
+      - ./app-data/:/data
+    entrypoint: ["bash", "/scripts/init_db.sh"]
+    depends_on:
+      - mongo_db
+
+  todo_flask_app:
+    container_name: todo_flask_app
+    build: app
+    ports:
+     - "5000:5000"
+    volumes:
+     - ./app:/app
+    depends_on:
+     mongo_init_db:
+      condition: service_completed_successfully
