@@ -20,3 +20,4 @@ rs3/journal
 
 .idea
 /venv
+.pytest_cache
