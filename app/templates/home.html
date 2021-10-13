@@ -6,8 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>ToDo App</title>
 
-		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='flatly.min.css') }}" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
@@ -15,19 +13,19 @@
 	</head>
 	<body>
 
-		<div class="container-fluid" id="wrapper">
+		<div class="container-fluid" id="wrapper" >
 
 			<div class="row">
 				<div class="col-lg-4 col-lg-offset-4" id="content">
-					<h2>WHAT DO YOU WANT TO DO TODAY?</h2>
+					<h2>WHAT DO YOU WANT TO DO?</h2>
 
 						<form action="{{ url_for('add_todo') }}" method="POST" role="form">
 
 						<div class="form-group">
 							<div class="input-group">
-							  <input name="add-todo" type="text" class="form-control" placeholder="Enter todo e.g. Delete junk files" aria-label="Todo" aria-describedby="add-btn">
+							  <input name="add-todo" type="text" class="form-control" placeholder="Enter some todo note here" aria-label="Todo" aria-describedby="add-btn">
 							  <span class="input-group-btn">
-								  <button type="submit" class="btn btn-default" id="add-btn">ADD</button>
+								  <button type="submit" class="btn btn-success" id="add-btn">ADD</button>
 							  </span>
 							</div>
 						</div>
@@ -37,16 +35,22 @@
 						<div class="col-lg-12">
 							<div class="btn-toolbar">
 								<div class="btn-group">
-										DELETE COMPLETED
-									</a>
+										<a href="{{ url_for('delete_completed') }}" button type="submit" class="btn btn-warning" id="delete-completed-button">DELETE COMPLETED</a>
 								</div>
 								<div class="btn-group">
-										DELETE ALL
-									</a>
+										<a href="{{ url_for('delete_all') }}" button type="submit" class="btn btn-warning" id="delete-all-button">DELETE ALL</a>
 								</div>
 							</div>
 						</div>
 					</div>
+
+					<ul class="list-group t20">
+						{% for todo in todos_list %}
+							<a href="{{ url_for('complete_todo', oid=todo._id) }}">
+								<li class="list-group-item {% if todo.complete %}todo-completed{% endif %}">{{ todo.description }}</li>
+							</a>
+						{% endfor %}
+					</ul>
 
 				</div>
 			</div>
@@ -54,7 +58,7 @@
 			<footer>
 				<div class="row pad">
 					<div class="col-lg-12 text-center">
-						Copyright &copy; 2020 <strong>ToDo App</strong>
+						<strong>ToDo App</strong>
 					</div>
 				</div>
 			</footer>

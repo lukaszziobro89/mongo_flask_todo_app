@@ -22,7 +22,7 @@ services:
 
   todo_flask_app:
     container_name: todo_flask_app
-    build: app
+    build: ./app
     ports:
      - "5000:5000"
     volumes:
