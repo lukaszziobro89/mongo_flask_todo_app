@@ -1,6 +1,5 @@
 body {
-	background: rgba(44, 62, 80, .8);
-	url("static/todo.jpg") transparent
+	background: rgba(44, 62, 80, .8)
 }
 #wrapper {
 	margin-top: 10% !important;
